@@ -1,0 +1,25 @@
+class Solution {
+public:
+    int numberOfArithmeticSlices(vector<int>& nums) {
+        int n = nums.size();
+        vector <unordered_map<int ,int>> hash_map(n);
+        long common_diff{0};
+        int ans =0;
+        for(int i =0;i<n;i++)
+        {
+            for(int j=0;j<i;j++)
+            {
+              common_diff = (long)nums[i] - (long)nums[j];
+                if(common_diff <= INT_MIN || common_diff >= INT_MAX)
+                    continue;
+              hash_map[i][common_diff]++;
+                if(hash_map[j].find(common_diff) != hash_map[j].end())
+                {
+                   hash_map[i][common_diff] += hash_map[j][common_diff];
+                    ans += hash_map[j][common_diff];
+                }
+                
+            }
+        }
+   return ans; }
+};
