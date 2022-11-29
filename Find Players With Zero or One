@@ -1,0 +1,32 @@
+class Solution {
+public:
+    vector<vector<int>> findWinners(vector<vector<int>>& matches) {
+        map<int,int>lost;
+        map<int,int>won;
+        for(auto it:matches)
+        {
+             lost[it[1]]++;
+             won[it[0]]++;
+        }
+        vector<vector<int>> ans;
+        vector<int>win;
+        for(auto it:won)
+        {
+            if(lost.find(it.first) == lost.end())
+            {
+                win.push_back(it.first);
+            }
+        }
+        vector<int> loose;
+        for(auto it:lost)
+        {
+            if(it.second == 1)
+            {
+                loose.push_back(it.first);
+            }
+        }
+        ans.push_back(win);
+        ans.push_back(loose);
+        return ans;
+    }
+};
