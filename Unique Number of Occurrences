@@ -1,0 +1,25 @@
+class Solution {
+public:
+    bool uniqueOccurrences(vector<int>& arr) {
+        map<int,int> freq;
+        for(auto it:arr)
+             freq[it]++;
+        bool ans = true;
+        set<int> st;
+        for(auto it:freq)
+        {
+            if(st.find(it.second) == st.end())
+            {
+                st.insert(it.second);
+            }
+            else
+            {
+                cout<<it.first<<" is occuring "<<it.second<<" times"<<"\n";
+                ans = false;
+                break;
+            }
+        }
+
+    return ans;
+    }
+};
