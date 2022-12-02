@@ -1,0 +1,32 @@
+class Solution {
+public:
+    bool closeStrings(string word1, string word2) {
+        int n = word1.size();
+        int m = word2.size();
+        unordered_map<char,int> hash1,hash2,char1,char2;
+
+        
+        for(auto it:word1)
+            {
+                hash1[it]++;
+                char1[it]=1;
+            }
+        for(auto it:word2)
+            {
+                hash2[it]++;
+                char2[it]=1;
+            }
+
+        if(hash1 == hash2)
+          return true;
+
+        multiset<int> one,two; 
+        for(auto it:hash1)
+              one.insert(it.second);
+
+        for(auto it:hash2)
+              two.insert(it.second);       
+             
+
+    return one==two && char1 == char2;}
+};
