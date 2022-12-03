@@ -1,0 +1,15 @@
+class Solution {
+public:
+    string frequencySort(string s) {
+        vector <pair<int,char>> hash('z'+1,{0,0});
+        for(auto ch:s)
+            hash[ch] ={hash[ch].first+1,ch};
+        sort(hash.begin(),hash.end());
+        string result="";
+            for(auto p:hash)
+            {
+                result = string(p.first,p.second)+result;
+            }
+        return result;
+    }
+};
