@@ -1,0 +1,29 @@
+ ListNode* oddEvenList(ListNode* head) {
+        if(!head)
+          return head;
+          ListNode* even = new ListNode();
+          ListNode* odd = new ListNode();
+          ListNode *even_pointer=even,*odd_pointer=odd;
+          ListNode* last = new ListNode();
+          ListNode* dummy = head;
+          int count = 1;
+          while(dummy)
+          {
+              ListNode* curr= new ListNode(dummy->val);
+              dummy = dummy->next;
+              if(count%2 == 0)
+              {
+                  even->next = curr; 
+                  even = curr;
+              }
+              else
+                 {
+                     odd->next = curr;
+                     odd = curr;
+                 }
+            count++; 
+          }
+          even_pointer->next = even_pointer->next;
+         odd->next=even_pointer->next;
+
+    return odd_pointer->next;}
