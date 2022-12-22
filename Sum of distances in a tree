@@ -1,0 +1,31 @@
+class Solution {
+public:
+    int depthFirstearch(int v,int par,vector<int> adjacent[],vector<int>& subtree){
+        int currentNode = 0;
+        for(auto u:adjacent[v]){
+            if(u!=par){
+                currentNode+=depthFirstearch(u,v,adjacent,subtree);
+                currentNode+=subtree[u];
+                subtree[v]+=subtree[u];
+            }
+        }
+        return currentNode;
+    }
+    void depthFirstearch(int v,int par,vector<int> adjacent[],vector<int>& ans,vector<int>& subtree,int now){
+        ans[v] = now;
+        for(auto u:adjacent[v]){
+            if(u!=par)
+                depthFirstearch(u,v,adjacent,ans,subtree,now-subtree[u]+subtree[0]-subtree[u]);
+        }
+    }
+    vector<int> sumOfDistancesInTree(int n, vector<vector<int>>& edges) {
+        vector<int> ans(n),subtree(n,1),adjacent[n];
+        for(auto v:edges){
+            adjacent[v[0]].push_back(v[1]);
+            adjacent[v[1]].push_back(v[0]);
+        }
+        int nnode = depthFirstearch(0,-1,adjacent,subtree);
+        depthFirstearch(0,-1,adjacent,ans,subtree,nnode);
+        return ans;
+    }
+};
